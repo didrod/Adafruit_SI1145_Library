@@ -17,11 +17,10 @@
 #ifndef _SI1145_H_
 #define _SI1145_H_
 
-
 #if (ARDUINO >= 100)
- #include "Arduino.h"
+#include "Arduino.h"
 #else
- #include "WProgram.h"
+#include "WProgram.h"
 #endif
 #include <Wire.h>
 
@@ -150,22 +149,23 @@
 
 class Adafruit_SI1145  {
  public:
-  Adafruit_SI1145(void);
-  boolean begin();
-  void reset();
+    explicit Adafruit_SI1145(TwoWire* wire, uint8_t addr = SI1145_ADDR);
+    boolean begin();
+    void reset();
 
-  uint16_t readUV();
-  uint16_t readIR();
-  uint16_t readVisible();
-  uint16_t readProx();
+    uint16_t readUV();
+    uint16_t readIR();
+    uint16_t readVisible();
+    uint16_t readProx();
 
  private:
-  uint16_t read16(uint8_t addr);
-  uint8_t read8(uint8_t addr);
-  void write8(uint8_t reg, uint8_t val);
-  uint8_t readParam(uint8_t p);
-  uint8_t writeParam(uint8_t p, uint8_t v);
+    uint16_t read16(uint8_t addr);
+    uint8_t read8(uint8_t addr);
+    void write8(uint8_t reg, uint8_t val);
+    uint8_t readParam(uint8_t p);
+    uint8_t writeParam(uint8_t p, uint8_t v);
 
-  uint8_t _addr;
+    uint8_t _addr;
+    TwoWire* _wire;
 };
 #endif
